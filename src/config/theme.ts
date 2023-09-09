@@ -15,6 +15,17 @@ export const theme = createTheme({
     button: {
       textTransform: 'none',
     },
+    subtitle1: {
+      fontSize: '12px',
+      color: '#ABBCFF',
+      fontWeight: 400,
+    },
+    subtitle2: {
+      fontSize: '14px',
+      color: '#FFFFFF',
+      fontWeight: 700,
+      letterSpacing: '1px',
+    },
   },
   components: {
     MuiButton: {
@@ -24,6 +35,15 @@ export const theme = createTheme({
           fontSize: '16px',
           lineHeight: '1',
           borderRadius: '8px',
+        },
+      },
+    },
+    MuiAvatar: {
+      styleOverrides: {
+        root: {
+          color: '#022959',
+          fontSize: '14px',
+          fontWeight: 700,
         },
       },
     },

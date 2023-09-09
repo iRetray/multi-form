@@ -1,10 +1,15 @@
-import Button from '@mui/material/Button';
+import { Button } from '@mui/material';
+
+import { CardFormContainer } from './styles';
+
+import Sidebar from './Sidebar';
 
 const MultiStepForm = () => {
   return (
-    <div>
+    <CardFormContainer>
+      <Sidebar />
       <Button variant="contained">Next step</Button>
-    </div>
+    </CardFormContainer>
   );
 };
 
