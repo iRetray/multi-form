@@ -35,6 +35,16 @@ export const theme = createTheme({
       fontWeight: 700,
       color: '#022959',
     },
+    h5: {
+      fontSize: '16px',
+      fontWeight: 700,
+      color: '#022959',
+    },
+    h6: {
+      fontSize: '20px',
+      fontWeight: 700,
+      color: '#483EFF',
+    },
     body1: {
       fontSize: '16px',
       fontWeight: 500,
