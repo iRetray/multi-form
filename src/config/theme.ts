@@ -15,6 +15,36 @@ export const theme = createTheme({
     button: {
       textTransform: 'none',
     },
+    h1: {
+      fontSize: '32px',
+      fontWeight: 700,
+      color: '#022959',
+    },
+    h2: {
+      fontSize: '16px',
+      fontWeight: 400,
+      color: '#9699AA',
+    },
+    h3: {
+      fontSize: '14px',
+      fontWeight: 400,
+      color: '#022959',
+    },
+    h4: {
+      fontSize: '14px',
+      fontWeight: 700,
+      color: '#022959',
+    },
+    body1: {
+      fontSize: '16px',
+      fontWeight: 500,
+      color: '#022959',
+    },
+    body2: {
+      fontSize: '14px',
+      fontWeight: 400,
+      color: '#9699AA',
+    },
     subtitle1: {
       fontSize: '12px',
       color: '#ABBCFF',

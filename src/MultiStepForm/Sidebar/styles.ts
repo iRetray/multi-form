@@ -1,9 +1,10 @@
 import { styled } from '@mui/system';
 
+import blueImage from '../../assets/images/blue-background.svg';
+
 export const SidebarContainer = styled('div')({
-  position: 'relative',
-  height: 600,
-  width: 275,
+  borderRadius: '10px',
+  backgroundImage: `url(${blueImage})`,
 });
 
 export const LabelsContainer = styled('div')({
