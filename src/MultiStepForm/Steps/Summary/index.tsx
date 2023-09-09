@@ -106,7 +106,7 @@ export const Summary: React.FC<SummaryProps> = ({ updateCurrentStep }) => {
           }}
           variant="text"
           onClick={() => {
-            updateCurrentStep(2);
+            updateCurrentStep(3);
           }}
         >
           Go Back
@@ -124,7 +124,7 @@ export const Summary: React.FC<SummaryProps> = ({ updateCurrentStep }) => {
           }}
           variant="contained"
           onClick={() => {
-            updateCurrentStep(4);
+            updateCurrentStep(5);
           }}
         >
           Confirm

@@ -2,9 +2,15 @@ import { CardFormContainer, FullscreenContainer } from './styles';
 
 import Sidebar from './Sidebar';
 import { useState } from 'react';
-import { PersonalInfo, PickAddOns, SelectYourPlan, Summary } from './Steps';
+import {
+  Finish,
+  PersonalInfo,
+  PickAddOns,
+  SelectYourPlan,
+  Summary,
+} from './Steps';
 
-export type Step = 1 | 2 | 3 | 4;
+export type Step = 1 | 2 | 3 | 4 | 5;
 
 const MultiStepForm = () => {
   const [step, setStep] = useState<Step>(1);
@@ -21,6 +27,7 @@ const MultiStepForm = () => {
         {step === 2 && <SelectYourPlan updateCurrentStep={updateCurrentStep} />}
         {step === 3 && <PickAddOns updateCurrentStep={updateCurrentStep} />}
         {step === 4 && <Summary updateCurrentStep={updateCurrentStep} />}
+        {step === 5 && <Finish />}
       </CardFormContainer>
     </FullscreenContainer>
   );
