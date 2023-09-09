@@ -22,7 +22,7 @@ const MultiStepForm = () => {
   return (
     <FullscreenContainer>
       <CardFormContainer>
-        <Sidebar />
+        <Sidebar activeStep={step} />
         {step === 1 && <PersonalInfo updateCurrentStep={updateCurrentStep} />}
         {step === 2 && <SelectYourPlan updateCurrentStep={updateCurrentStep} />}
         {step === 3 && <PickAddOns updateCurrentStep={updateCurrentStep} />}

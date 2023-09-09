@@ -14,6 +14,6 @@ export const TextContainer = styled('div')({
 
 export const AvatarStyled = styled(Avatar)(({ active }) => ({
   backgroundColor: active ? '#BEE2FD' : 'transparent',
-  border: active ? 'none' : '1px solid #FFFFFF',
+  border: active ? '1px solid #BEE2FD' : '1px solid #FFFFFF',
   color: active ? 'inherit' : '#FFFFFF',
 }));
