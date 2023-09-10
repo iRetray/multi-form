@@ -1,7 +1,7 @@
 import { styled } from '@mui/system';
 
-import { TextField } from '@mui/material';
-
-export const TextFieldStyled = styled(TextField)({
-  borderRadius: '100px',
+export const LabelsContainer = styled('div')({
+  marginBottom: '8px',
+  display: 'flex',
+  justifyContent: 'space-between',
 });

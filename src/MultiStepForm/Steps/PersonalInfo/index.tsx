@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { Typography, Button } from '@mui/material';
-import { InputWithValidation } from '../../../components';
+import { Typography } from '@mui/material';
+import { ButtonBlue, InputWithValidation } from '../../../components';
 import { StepContainer } from '../../styles';
 
 import { Step } from '../..';
@@ -80,22 +80,7 @@ export const PersonalInfo: React.FC<PersonalInfoProps> = ({
           label="Phone Number"
           placeholder="e.g. +1 234 567 890"
         />
-        <Button
-          type="submit"
-          sx={{
-            ':hover': {
-              bgcolor: '#164A8A',
-            },
-          }}
-          style={{
-            width: 'fit-content',
-            marginTop: 'auto',
-            marginLeft: 'auto',
-          }}
-          variant="contained"
-        >
-          Next step
-        </Button>
+        <ButtonBlue type="submit">Next step</ButtonBlue>
       </form>
     </StepContainer>
   );

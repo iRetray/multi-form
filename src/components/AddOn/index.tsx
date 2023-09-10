@@ -1,6 +1,7 @@
 import { Typography, Checkbox } from '@mui/material';
 
 import { AddOnContainer } from './styles';
+import { COLORS } from '../../constants';
 
 interface AddOnProps {
   checked?: boolean;
@@ -27,7 +28,10 @@ export const AddOn: React.FC<AddOnProps> = ({
       <Typography variant="body1">{title}</Typography>
       <Typography variant="body2">{subtitle}</Typography>
     </div>
-    <Typography variant="h3" style={{ color: '#483EFF', marginLeft: 'auto' }}>
+    <Typography
+      variant="h3"
+      style={{ color: COLORS.secondary, marginLeft: 'auto' }}
+    >
       {price}
     </Typography>
   </AddOnContainer>

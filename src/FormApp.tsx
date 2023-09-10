@@ -2,12 +2,13 @@ import { ThemeProvider, GlobalStyles } from '@mui/material';
 import { theme } from './config';
 
 import MultiStepForm from './MultiStepForm';
+import { COLORS } from './constants';
 
 const FormApp = () => (
   <ThemeProvider theme={theme}>
     <GlobalStyles
       styles={{
-        body: { backgroundColor: '#EFF5FF' },
+        body: { backgroundColor: COLORS.greySoft },
       }}
     />
     <MultiStepForm />

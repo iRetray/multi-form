@@ -1,13 +1,14 @@
 import { createTheme } from '@mui/material';
+import { COLORS } from '../constants';
 
 export const theme = createTheme({
   palette: {
     mode: 'light',
     primary: {
-      main: '#022959',
+      main: COLORS.primary,
     },
     secondary: {
-      main: '#483EFF',
+      main: COLORS.secondary,
     },
   },
   typography: {
@@ -18,51 +19,51 @@ export const theme = createTheme({
     h1: {
       fontSize: '32px',
       fontWeight: 700,
-      color: '#022959',
+      color: COLORS.primary,
     },
     h2: {
       fontSize: '16px',
       fontWeight: 400,
-      color: '#9699AA',
+      color: COLORS.greyDark,
     },
     h3: {
       fontSize: '14px',
       fontWeight: 400,
-      color: '#022959',
+      color: COLORS.primary,
     },
     h4: {
       fontSize: '14px',
       fontWeight: 700,
-      color: '#022959',
+      color: COLORS.primary,
     },
     h5: {
       fontSize: '16px',
       fontWeight: 700,
-      color: '#022959',
+      color: COLORS.primary,
     },
     h6: {
       fontSize: '20px',
       fontWeight: 700,
-      color: '#483EFF',
+      color: COLORS.secondary,
     },
     body1: {
       fontSize: '16px',
       fontWeight: 500,
-      color: '#022959',
+      color: COLORS.primary,
     },
     body2: {
       fontSize: '14px',
       fontWeight: 400,
-      color: '#9699AA',
+      color: COLORS.greyDark,
     },
     subtitle1: {
       fontSize: '12px',
-      color: '#ABBCFF',
+      color: COLORS.bluePurple,
       fontWeight: 400,
     },
     subtitle2: {
       fontSize: '14px',
-      color: '#FFFFFF',
+      color: COLORS.white,
       fontWeight: 700,
       letterSpacing: '1px',
     },
@@ -81,7 +82,7 @@ export const theme = createTheme({
     MuiAvatar: {
       styleOverrides: {
         root: {
-          color: '#022959',
+          color: COLORS.primary,
           fontSize: '14px',
           fontWeight: 700,
         },

@@ -2,6 +2,8 @@ import { TextField, Typography } from '@mui/material';
 
 import { Controller, Control, RegisterOptions } from 'react-hook-form';
 import { PersonalInfoFormInterface } from '../../MultiStepForm/Steps/PersonalInfo';
+import { LabelsContainer } from './styles';
+import { COLORS } from '../../constants';
 
 interface InputWithValidationProps {
   label: string;
@@ -31,20 +33,14 @@ export const InputWithValidation: React.FC<InputWithValidationProps> = ({
       rules={rules}
       render={({ field, fieldState }) => (
         <>
-          <div
-            style={{
-              marginBottom: '8px',
-              display: 'flex',
-              justifyContent: 'space-between',
-            }}
-          >
+          <LabelsContainer>
             <Typography variant="h3">{label}</Typography>
             {fieldState.error && (
-              <Typography style={{ color: '#EE374A' }} variant="h4">
+              <Typography style={{ color: COLORS.red }} variant="h4">
                 {fieldState.error.message}
               </Typography>
             )}
-          </div>
+          </LabelsContainer>
           <TextField
             {...field}
             error={!!fieldState.error}
@@ -54,7 +50,7 @@ export const InputWithValidation: React.FC<InputWithValidationProps> = ({
               sx: {
                 borderRadius: '8px',
                 height: '48px',
-                borderColor: '#D6D9E6',
+                borderColor: COLORS.grey,
               },
             }}
             InputLabelProps={{

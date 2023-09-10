@@ -1,11 +1,11 @@
 import React from 'react';
 
-import { Typography, Button } from '@mui/material';
+import { Typography } from '@mui/material';
 import { StepContainer } from '../../styles';
 
 import { Step } from '../..';
 
-import { AddOn } from '../../../components';
+import { AddOn, ButtonBlue, ButtonWhite } from '../../../components';
 import { useForm } from 'react-hook-form';
 
 interface PickAddOnsProps {
@@ -90,43 +90,14 @@ export const PickAddOns: React.FC<PickAddOnsProps> = ({
           price="+$2/mo"
         />
         <div style={{ display: 'flex', marginTop: 'auto' }}>
-          <Button
-            sx={{
-              color: '#9699AA',
-              bgcolor: '#FFFFFF',
-              ':hover': {
-                bgcolor: '#FFFFFF',
-                color: '#022959',
-              },
-            }}
-            style={{
-              width: 'fit-content',
-              marginTop: 'auto',
-              marginLeft: '0px',
-            }}
-            variant="text"
+          <ButtonWhite
             onClick={() => {
               updateCurrentStep(2);
             }}
           >
             Go Back
-          </Button>
-          <Button
-            type="submit"
-            sx={{
-              ':hover': {
-                bgcolor: '#164A8A',
-              },
-            }}
-            style={{
-              width: 'fit-content',
-              marginTop: 'auto',
-              marginLeft: 'auto',
-            }}
-            variant="contained"
-          >
-            Next step
-          </Button>
+          </ButtonWhite>
+          <ButtonBlue type="submit">Next step</ButtonBlue>
         </div>
       </form>
     </StepContainer>

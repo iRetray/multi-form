@@ -1,12 +1,13 @@
 import { styled } from '@mui/material/styles';
 import Switch from '@mui/material/Switch';
+import { COLORS } from '../../../constants';
 
 export const SwitchContainer = styled('div')({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
   gap: '24px',
-  backgroundColor: '#F8F9FF',
+  backgroundColor: COLORS.greyMedium,
   borderRadius: '8px',
   padding: '12px',
   marginTop: '32px',
@@ -14,10 +15,10 @@ export const SwitchContainer = styled('div')({
 
 export const SwitchStyled = styled(Switch)(({ theme }) => ({
   '& .MuiSwitch-switchBase': {
-    color: '#fff',
+    color: COLORS.white,
     '& + .MuiSwitch-track': {
       opacity: 1,
-      backgroundColor: '#022959',
+      backgroundColor: COLORS.primary,
     },
   },
   '& .MuiSwitch-thumb': {
@@ -34,7 +35,7 @@ export const SwitchStyled = styled(Switch)(({ theme }) => ({
   '& .MuiSwitch-track': {
     borderRadius: 100,
     opacity: 1,
-    backgroundColor: '#FFFFFF',
+    backgroundColor: COLORS.white,
     boxSizing: 'border-box',
   },
   width: 38,

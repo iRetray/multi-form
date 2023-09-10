@@ -1,12 +1,12 @@
 import React from 'react';
 
-import { Typography, Button } from '@mui/material';
+import { Typography } from '@mui/material';
 import { StepContainer } from '../../styles';
 
 import { FormValuesState, Step } from '../..';
 import { BillContainer } from './styles';
-import { Intervals, PlanTypes } from '../../../constants';
-import { SummaryAddOn } from '../../../components';
+import { COLORS, Intervals, PlanTypes } from '../../../constants';
+import { ButtonBlue, ButtonWhite, SummaryAddOn } from '../../../components';
 
 const PLAN_TYPE_TO_STRING = {
   [PlanTypes.ARCADE]: 'Arcade',
@@ -116,7 +116,7 @@ export const Summary: React.FC<SummaryProps> = ({
           pickAddOns.customizableProfile) && (
           <hr
             style={{
-              color: '#9699AA',
+              color: COLORS.greyDark,
               borderStyle: 'solid',
               opacity: 0.2,
               marginTop: '24px',
@@ -157,47 +157,21 @@ export const Summary: React.FC<SummaryProps> = ({
         </Typography>
         <Typography variant="h6">{getTotalPrice()}</Typography>
       </div>
-
       <div style={{ display: 'flex', marginTop: 'auto' }}>
-        <Button
-          sx={{
-            color: '#9699AA',
-            bgcolor: '#FFFFFF',
-            ':hover': {
-              bgcolor: '#FFFFFF',
-              color: '#022959',
-            },
-          }}
-          style={{
-            width: 'fit-content',
-            marginTop: 'auto',
-            marginLeft: '0px',
-          }}
-          variant="text"
+        <ButtonWhite
           onClick={() => {
             updateCurrentStep(3);
           }}
         >
           Go Back
-        </Button>
-        <Button
-          sx={{
-            ':hover': {
-              bgcolor: '#164A8A',
-            },
-          }}
-          style={{
-            width: 'fit-content',
-            marginTop: 'auto',
-            marginLeft: 'auto',
-          }}
-          variant="contained"
+        </ButtonWhite>
+        <ButtonBlue
           onClick={() => {
             updateCurrentStep(5);
           }}
         >
           Confirm
-        </Button>
+        </ButtonBlue>
       </div>
     </StepContainer>
   );

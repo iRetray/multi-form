@@ -1,6 +1,7 @@
 import { styled } from '@mui/system';
 
 import { Avatar } from '@mui/material';
+import { COLORS } from '../../constants';
 
 export const SidebarLabelContainer = styled('div')({
   position: 'relative',
@@ -13,7 +14,7 @@ export const TextContainer = styled('div')({
 });
 
 export const AvatarStyled = styled(Avatar)(({ active }) => ({
-  backgroundColor: active ? '#BEE2FD' : 'transparent',
-  border: active ? '1px solid #BEE2FD' : '1px solid #FFFFFF',
-  color: active ? 'inherit' : '#FFFFFF',
+  backgroundColor: active ? COLORS.blueSoft : 'transparent',
+  border: active ? `1px solid ${COLORS.blueSoft}` : `1px solid ${COLORS.white}`,
+  color: active ? 'inherit' : COLORS.white,
 }));
