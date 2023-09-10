@@ -12,6 +12,7 @@ import {
   SelectYourPlanFormInterface,
   Summary,
 } from './Steps';
+import { Intervals, PlanTypes } from '../constants';
 
 export type Step = 1 | 2 | 3 | 4 | 5;
 
@@ -30,8 +31,8 @@ const MultiStepForm = () => {
       phone: '',
     },
     selectYourPlan: {
-      planType: 'ARCADE',
-      interval: 'MONTHLY',
+      planType: PlanTypes.ARCADE,
+      interval: Intervals.MONTHLY,
     },
     pickAddOns: {
       onlineService: false,

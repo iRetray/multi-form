@@ -9,6 +9,7 @@ import { PlanCard } from '../../../components';
 import { ArcadeIcon, AdvancedIcon, ProIcon } from './PLAN_ICONS';
 import { SwitchContainer, SwitchStyled } from './styles';
 import { useForm } from 'react-hook-form';
+import { Intervals, PlanTypes } from '../../../constants';
 
 interface SelectYourPlanProps {
   initialValues: SelectYourPlanFormInterface;
@@ -16,12 +17,9 @@ interface SelectYourPlanProps {
   updateCurrentStep: (nextStep: Step) => void;
 }
 
-type PlanTypeI = 'ARCADE' | 'ADVANCED' | 'PRO';
-type IntervalI = 'MONTHLY' | 'YEARLY';
-
 export interface SelectYourPlanFormInterface {
-  planType: PlanTypeI;
-  interval: IntervalI;
+  planType: PlanTypes;
+  interval: Intervals;
 }
 
 export const SelectYourPlan: React.FC<SelectYourPlanProps> = ({
@@ -35,20 +33,21 @@ export const SelectYourPlan: React.FC<SelectYourPlanProps> = ({
     });
 
   const currentType = watch('planType');
+  const currentInterval = watch('interval');
 
   const onSubmit = (): void => {
     onFormSubmited(getValues());
     updateCurrentStep(3);
   };
 
-  const handleClickCard = (newType: PlanTypeI): void => {
+  const handleClickCard = (newType: PlanTypes): void => {
     setValue('planType', newType);
   };
 
   const handleChangeSwitch = ({
     target,
   }: React.ChangeEvent<HTMLInputElement>) => {
-    setValue('interval', target.checked ? 'YEARLY' : 'MONTHLY');
+    setValue('interval', target.checked ? Intervals.YEARLY : Intervals.MONTHLY);
   };
 
   return (
@@ -74,7 +73,7 @@ export const SelectYourPlan: React.FC<SelectYourPlanProps> = ({
             title="Arcade"
             price="$9/mo"
             onClick={() => {
-              handleClickCard('ARCADE');
+              handleClickCard(PlanTypes.ARCADE);
             }}
           />
           <PlanCard
@@ -83,7 +82,7 @@ export const SelectYourPlan: React.FC<SelectYourPlanProps> = ({
             title="Advanced"
             price="$12/mo"
             onClick={() => {
-              handleClickCard('ADVANCED');
+              handleClickCard(PlanTypes.ADVANCED);
             }}
           />
           <PlanCard
@@ -93,13 +92,16 @@ export const SelectYourPlan: React.FC<SelectYourPlanProps> = ({
             title="Pro"
             price="$15/mo"
             onClick={() => {
-              handleClickCard('PRO');
+              handleClickCard(PlanTypes.PRO);
             }}
           />
         </div>
         <SwitchContainer>
           <Typography variant="h4">Monthly</Typography>
-          <SwitchStyled onChange={handleChangeSwitch} />
+          <SwitchStyled
+            checked={currentInterval === Intervals.YEARLY}
+            onChange={handleChangeSwitch}
+          />
           <Typography variant="h4">Yearly</Typography>
         </SwitchContainer>
         <div style={{ display: 'flex', marginTop: 'auto' }}>

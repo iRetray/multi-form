@@ -47,6 +47,7 @@ export const InputWithValidation: React.FC<InputWithValidationProps> = ({
           </div>
           <TextField
             {...field}
+            error={!!fieldState.error}
             placeholder={placeholder}
             style={{ height: '48px', marginBottom: '24px' }}
             InputProps={{

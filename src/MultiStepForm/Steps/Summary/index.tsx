@@ -5,16 +5,30 @@ import { StepContainer } from '../../styles';
 
 import { FormValuesState, Step } from '../..';
 import { BillContainer } from './styles';
+import { Intervals, PlanTypes } from '../../../constants';
+import { SummaryAddOn } from '../../../components';
 
 const PLAN_TYPE_TO_STRING = {
-  ARCADE: 'Arcade',
-  ADVANCED: 'Advanced',
-  PRO: 'Pro',
+  [PlanTypes.ARCADE]: 'Arcade',
+  [PlanTypes.ADVANCED]: 'Advanced',
+  [PlanTypes.PRO]: 'Pro',
 };
 
+const PLAN_TYPE_TO_PRICE = (isMonthly: boolean) => ({
+  [PlanTypes.ARCADE]: isMonthly ? '$9/mo' : '$90/yr',
+  [PlanTypes.ADVANCED]: isMonthly ? '$12/mo' : '$120/yr',
+  [PlanTypes.PRO]: isMonthly ? '$15/mo' : '$150/yr',
+});
+
+const ADDON_TO_PRICE = (isMonthly: boolean) => ({
+  'Online service': isMonthly ? '+$1/mo' : '+$10/yr',
+  'Larger storage': isMonthly ? '+$2/mo' : '+$20/yr',
+  'Customizable profile': isMonthly ? '+$2/mo' : '+$20/yr',
+});
+
 const PLAN_INTERVAL_TO_STRING = {
-  MONTHLY: 'Monthly',
-  YEARLY: 'Yearly',
+  [Intervals.MONTHLY]: 'Monthly',
+  [Intervals.YEARLY]: 'Yearly',
 };
 
 interface SummaryProps {
@@ -25,125 +39,166 @@ interface SummaryProps {
 export const Summary: React.FC<SummaryProps> = ({
   formValues,
   updateCurrentStep,
-}) => (
-  <StepContainer>
-    <Typography variant="h1" style={{ marginBottom: '12px' }}>
-      Finishing up
-    </Typography>
-    <Typography variant="h2" style={{ marginBottom: '35px' }}>
-      Double-check everything looks OK before confirming.
-    </Typography>
-    <BillContainer>
-      <div
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-        }}
-      >
-        <div>
-          <Typography variant="body1" style={{ marginBottom: '8px' }}>
-            {PLAN_TYPE_TO_STRING[formValues.selectYourPlan.planType]} (
-            {PLAN_INTERVAL_TO_STRING[formValues.selectYourPlan.interval]})
-          </Typography>
-          <Typography
-            variant="body2"
-            style={{ marginBottom: '8px', textDecoration: 'underline' }}
-          >
-            Change
+}) => {
+  const { selectYourPlan, pickAddOns } = formValues;
+
+  const isMonthly = selectYourPlan.interval === Intervals.MONTHLY;
+
+  const extractNumbersFromString = (string: string): number => {
+    const matchResult = string.match(/\d+/g);
+    return matchResult ? parseInt(matchResult[0], 10) : 0;
+  };
+
+  const getTotalPrice = (): string => {
+    let total = extractNumbersFromString(
+      PLAN_TYPE_TO_PRICE(isMonthly)[selectYourPlan.planType],
+    );
+    if (pickAddOns.onlineService) {
+      total =
+        total +
+        extractNumbersFromString(ADDON_TO_PRICE(isMonthly)['Online service']);
+    }
+    if (pickAddOns.largerStorage) {
+      total =
+        total +
+        extractNumbersFromString(ADDON_TO_PRICE(isMonthly)['Larger storage']);
+    }
+    if (pickAddOns.customizableProfile) {
+      total =
+        total +
+        extractNumbersFromString(
+          ADDON_TO_PRICE(isMonthly)['Customizable profile'],
+        );
+    }
+    return isMonthly ? `$${total}/mo` : `$${total}/yr`;
+  };
+
+  return (
+    <StepContainer>
+      <Typography variant="h1" style={{ marginBottom: '12px' }}>
+        Finishing up
+      </Typography>
+      <Typography variant="h2" style={{ marginBottom: '35px' }}>
+        Double-check everything looks OK before confirming.
+      </Typography>
+      <BillContainer>
+        <div
+          style={{
+            display: 'flex',
+            alignItems: 'center',
+          }}
+        >
+          <div>
+            <Typography variant="body1" style={{ marginBottom: '8px' }}>
+              {PLAN_TYPE_TO_STRING[selectYourPlan.planType]} (
+              {PLAN_INTERVAL_TO_STRING[selectYourPlan.interval]})
+            </Typography>
+            <Typography
+              variant="body2"
+              onClick={() => {
+                updateCurrentStep(2);
+              }}
+              style={{
+                marginBottom: '8px',
+                textDecoration: 'underline',
+                cursor: 'pointer',
+              }}
+            >
+              Change
+            </Typography>
+          </div>
+          <Typography style={{ marginLeft: 'auto' }} variant="h5">
+            {PLAN_TYPE_TO_PRICE(isMonthly)[selectYourPlan.planType]}
           </Typography>
         </div>
-        <Typography style={{ marginLeft: 'auto' }} variant="h5">
-          $9/mo
-        </Typography>
-      </div>
-      <hr
-        style={{
-          color: '#9699AA',
-          borderStyle: 'solid',
-          opacity: 0.2,
-          marginTop: '24px',
-          marginBottom: '24px',
-        }}
-      />
-      <div
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          marginTop: '16px',
-        }}
-      >
-        <Typography variant="body2">Online service</Typography>
-        <Typography variant="h3" style={{ color: '#022959' }}>
-          +$1/mo
-        </Typography>
-      </div>
-      <div
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          marginTop: '16px',
-        }}
-      >
-        <Typography variant="body2">Online service</Typography>
-        <Typography variant="h3" style={{ color: '#022959' }}>
-          +$1/mo
-        </Typography>
-      </div>
-    </BillContainer>
-    <div
-      style={{
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'space-between',
-        margin: '24px',
-      }}
-    >
-      <Typography variant="body2">Total (per month)</Typography>
-      <Typography variant="h6">+$12/mo</Typography>
-    </div>
+        {(pickAddOns.onlineService ||
+          pickAddOns.largerStorage ||
+          pickAddOns.customizableProfile) && (
+          <hr
+            style={{
+              color: '#9699AA',
+              borderStyle: 'solid',
+              opacity: 0.2,
+              marginTop: '24px',
+              marginBottom: '24px',
+            }}
+          />
+        )}
 
-    <div style={{ display: 'flex', marginTop: 'auto' }}>
-      <Button
-        sx={{
-          color: '#9699AA',
-          bgcolor: '#FFFFFF',
-          ':hover': {
+        {pickAddOns.onlineService && (
+          <SummaryAddOn
+            name="Online service"
+            price={ADDON_TO_PRICE(isMonthly)['Online service']}
+          />
+        )}
+        {pickAddOns.largerStorage && (
+          <SummaryAddOn
+            name="Larger storage"
+            price={ADDON_TO_PRICE(isMonthly)['Larger storage']}
+          />
+        )}
+        {pickAddOns.customizableProfile && (
+          <SummaryAddOn
+            name="Customizable profile"
+            price={ADDON_TO_PRICE(isMonthly)['Customizable profile']}
+          />
+        )}
+      </BillContainer>
+      <div
+        style={{
+          display: 'flex',
+          alignItems: 'center',
+          justifyContent: 'space-between',
+          margin: '24px',
+        }}
+      >
+        <Typography variant="body2">
+          {isMonthly ? 'Total (per month)' : 'Total (per year)'}
+        </Typography>
+        <Typography variant="h6">{getTotalPrice()}</Typography>
+      </div>
+
+      <div style={{ display: 'flex', marginTop: 'auto' }}>
+        <Button
+          sx={{
+            color: '#9699AA',
             bgcolor: '#FFFFFF',
-            color: '#022959',
-          },
-        }}
-        style={{
-          width: 'fit-content',
-          marginTop: 'auto',
-          marginLeft: '0px',
-        }}
-        variant="text"
-        onClick={() => {
-          updateCurrentStep(3);
-        }}
-      >
-        Go Back
-      </Button>
-      <Button
-        sx={{
-          ':hover': {
-            bgcolor: '#164A8A',
-          },
-        }}
-        style={{
-          width: 'fit-content',
-          marginTop: 'auto',
-          marginLeft: 'auto',
-        }}
-        variant="contained"
-        onClick={() => {
-          updateCurrentStep(5);
-        }}
-      >
-        Confirm
-      </Button>
-    </div>
-  </StepContainer>
-);
+            ':hover': {
+              bgcolor: '#FFFFFF',
+              color: '#022959',
+            },
+          }}
+          style={{
+            width: 'fit-content',
+            marginTop: 'auto',
+            marginLeft: '0px',
+          }}
+          variant="text"
+          onClick={() => {
+            updateCurrentStep(3);
+          }}
+        >
+          Go Back
+        </Button>
+        <Button
+          sx={{
+            ':hover': {
+              bgcolor: '#164A8A',
+            },
+          }}
+          style={{
+            width: 'fit-content',
+            marginTop: 'auto',
+            marginLeft: 'auto',
+          }}
+          variant="contained"
+          onClick={() => {
+            updateCurrentStep(5);
+          }}
+        >
+          Confirm
+        </Button>
+      </div>
+    </StepContainer>
+  );
+};
