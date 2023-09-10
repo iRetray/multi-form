@@ -1,7 +1,7 @@
 import { CardFormContainer, FullscreenContainer } from './styles';
 
 import Sidebar from './Sidebar';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   Finish,
   PersonalInfo,
@@ -58,10 +58,27 @@ const MultiStepForm = () => {
     });
   };
 
+  const [isMobile, setIsMobile] = useState<boolean>(false);
+
+  useEffect(() => {
+    const mediaQuery = window.matchMedia('(max-width: 768px)');
+    const handleMediaQueryChange = mediaQuery => {
+      setIsMobile(mediaQuery.matches);
+    };
+
+    handleMediaQueryChange(mediaQuery);
+    mediaQuery.addEventListener('change', handleMediaQueryChange);
+
+    return () => {
+      mediaQuery.removeEventListener('change', handleMediaQueryChange);
+    };
+  }, []);
+
   return (
     <FullscreenContainer>
+      {isMobile && <Sidebar activeStep={step} />}
       <CardFormContainer>
-        <Sidebar activeStep={step} />
+        {!isMobile && <Sidebar activeStep={step} />}
         {step === 1 && (
           <PersonalInfo
             initialValues={formValues.personalInfo}

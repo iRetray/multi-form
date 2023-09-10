@@ -4,13 +4,19 @@ import { Avatar } from '@mui/material';
 import { COLORS } from '../../constants';
 
 export const SidebarLabelContainer = styled('div')({
-  position: 'relative',
   display: 'flex',
   marginBottom: '32px',
+  '@media (max-width: 800px)': {
+    marginBottom: '0px',
+    margin: '0px 16px',
+  },
 });
 
 export const TextContainer = styled('div')({
   marginLeft: '16px',
+  '@media (max-width: 800px)': {
+    display: 'none',
+  },
 });
 
 export const AvatarStyled = styled(Avatar)(({ active }) => ({
