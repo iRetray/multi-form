@@ -5,7 +5,6 @@ import { StepContainer } from '../../styles';
 
 import { Step } from '../..';
 
-import { SwitchContainer, SwitchStyled } from './styles';
 import { AddOn } from '../../../components';
 
 interface PickAddOnsProps {
