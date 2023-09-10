@@ -14,6 +14,7 @@ module.exports = {
   testEnvironment: 'jsdom',
   transform: {
     '^.+\\.(ts|tsx|js|jsx)$': 'ts-jest',
+    '^.+\\.svg$': '<rootDir>/svgTransform.cjs',
   },
   moduleNameMapper: {
     '@mui/styled-engine': '<rootDir>/node_modules/@mui/styled-engine-sc',

@@ -2,21 +2,17 @@
 import '@testing-library/jest-dom';
 
 import { fireEvent, render, screen } from '@testing-library/react';
-import { PersonalInfo } from '../../src/MultiStepForm/Steps/PersonalInfo';
+import MultiStepForm from '../../src/MultiStepForm';
 
-describe('<PersonalInfo />', () => {
+describe('<Summary />', () => {
   beforeEach(() => {
     render(
       // @ts-ignore
-      <PersonalInfo
-        initialValues={{ name: '', email: '', phone: '' }}
-        onFormSubmited={() => {}}
-        updateCurrentStep={() => {}}
-      />,
+      <MultiStepForm />,
     );
   });
 
-  it('Render correctly', () => {
+  it('Render step 1', () => {
     expect(screen.getByText('Personal info')).toBeInTheDocument();
   });
 
