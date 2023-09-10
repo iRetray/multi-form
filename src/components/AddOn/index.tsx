@@ -7,6 +7,7 @@ interface AddOnProps {
   title: string;
   subtitle: string;
   price: string;
+  onChange: (isChecked: boolean) => void;
 }
 
 export const AddOn: React.FC<AddOnProps> = ({
@@ -14,9 +15,14 @@ export const AddOn: React.FC<AddOnProps> = ({
   title,
   subtitle,
   price,
+  onChange,
 }) => (
-  <AddOnContainer checked={checked}>
-    <Checkbox style={{ marginLeft: '-12px', marginRight: '12px' }} />
+  <AddOnContainer checked={checked} onClick={() => onChange(!checked)}>
+    <Checkbox
+      style={{ marginLeft: '-12px', marginRight: '12px' }}
+      checked={checked}
+      onClick={() => onChange(!checked)}
+    />
     <div>
       <Typography variant="body1">{title}</Typography>
       <Typography variant="body2">{subtitle}</Typography>

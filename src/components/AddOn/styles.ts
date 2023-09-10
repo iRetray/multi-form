@@ -3,16 +3,17 @@ import { styled } from '@mui/system';
 import { Avatar } from '@mui/material';
 
 interface Props {
-  selected: boolean;
+  checked: boolean;
 }
 
-export const AddOnContainer = styled('div')<Props>(({ selected }) => ({
+export const AddOnContainer = styled('div')<Props>(({ checked }) => ({
+  cursor: 'pointer',
   display: 'flex',
   flexDirection: 'row',
   alignItems: 'center',
-  cursor: 'pointer',
   marginBottom: '16px',
-  border: selected ? '1px solid #483EFF' : '1px solid #D6D9E6',
+  border: checked ? '1px solid #483EFF' : '1px solid #D6D9E6',
+  backgroundColor: checked ? '#F8F9FF' : '#FFF',
   borderRadius: '8px',
   padding: '18px 24px',
   ':hover': {

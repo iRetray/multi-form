@@ -3,14 +3,29 @@ import React from 'react';
 import { Typography, Button } from '@mui/material';
 import { StepContainer } from '../../styles';
 
-import { Step } from '../..';
+import { FormValuesState, Step } from '../..';
 import { BillContainer } from './styles';
 
+const PLAN_TYPE_TO_STRING = {
+  ARCADE: 'Arcade',
+  ADVANCED: 'Advanced',
+  PRO: 'Pro',
+};
+
+const PLAN_INTERVAL_TO_STRING = {
+  MONTHLY: 'Monthly',
+  YEARLY: 'Yearly',
+};
+
 interface SummaryProps {
+  formValues: FormValuesState;
   updateCurrentStep: (nextStep: Step) => void;
 }
 
-export const Summary: React.FC<SummaryProps> = ({ updateCurrentStep }) => (
+export const Summary: React.FC<SummaryProps> = ({
+  formValues,
+  updateCurrentStep,
+}) => (
   <StepContainer>
     <Typography variant="h1" style={{ marginBottom: '12px' }}>
       Finishing up
@@ -27,7 +42,8 @@ export const Summary: React.FC<SummaryProps> = ({ updateCurrentStep }) => (
       >
         <div>
           <Typography variant="body1" style={{ marginBottom: '8px' }}>
-            Arcade (Monthly)
+            {PLAN_TYPE_TO_STRING[formValues.selectYourPlan.planType]} (
+            {PLAN_INTERVAL_TO_STRING[formValues.selectYourPlan.interval]})
           </Typography>
           <Typography
             variant="body2"

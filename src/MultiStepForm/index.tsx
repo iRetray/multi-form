@@ -7,14 +7,18 @@ import {
   PersonalInfo,
   PersonalInfoFormInterface,
   PickAddOns,
+  PickAddOnsFormInterface,
   SelectYourPlan,
+  SelectYourPlanFormInterface,
   Summary,
 } from './Steps';
 
 export type Step = 1 | 2 | 3 | 4 | 5;
 
-interface FormValuesState {
+export interface FormValuesState {
   personalInfo: PersonalInfoFormInterface;
+  selectYourPlan: SelectYourPlanFormInterface;
+  pickAddOns: PickAddOnsFormInterface;
 }
 
 const MultiStepForm = () => {
@@ -25,6 +29,15 @@ const MultiStepForm = () => {
       email: '',
       phone: '',
     },
+    selectYourPlan: {
+      planType: 'ARCADE',
+      interval: 'MONTHLY',
+    },
+    pickAddOns: {
+      onlineService: false,
+      largerStorage: false,
+      customizableProfile: false,
+    },
   });
 
   const updateCurrentStep = (nextStep: Step): void => {
@@ -33,7 +46,10 @@ const MultiStepForm = () => {
 
   const updateFormData = (
     formName: string,
-    data: PersonalInfoFormInterface,
+    data:
+      | PersonalInfoFormInterface
+      | SelectYourPlanFormInterface
+      | PickAddOnsFormInterface,
   ): void => {
     setFormValues({
       ...formValues,
@@ -52,9 +68,26 @@ const MultiStepForm = () => {
             updateCurrentStep={updateCurrentStep}
           />
         )}
-        {step === 2 && <SelectYourPlan updateCurrentStep={updateCurrentStep} />}
-        {step === 3 && <PickAddOns updateCurrentStep={updateCurrentStep} />}
-        {step === 4 && <Summary updateCurrentStep={updateCurrentStep} />}
+        {step === 2 && (
+          <SelectYourPlan
+            initialValues={formValues.selectYourPlan}
+            onFormSubmited={data => updateFormData('selectYourPlan', data)}
+            updateCurrentStep={updateCurrentStep}
+          />
+        )}
+        {step === 3 && (
+          <PickAddOns
+            initialValues={formValues.pickAddOns}
+            onFormSubmited={data => updateFormData('pickAddOns', data)}
+            updateCurrentStep={updateCurrentStep}
+          />
+        )}
+        {step === 4 && (
+          <Summary
+            formValues={formValues}
+            updateCurrentStep={updateCurrentStep}
+          />
+        )}
         {step === 5 && <Finish />}
       </CardFormContainer>
     </FullscreenContainer>
