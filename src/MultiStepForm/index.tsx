@@ -1,7 +1,7 @@
 import { CardFormContainer, FullscreenContainer } from './styles';
 
 import Sidebar from './Sidebar';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import {
   Finish,
   PersonalInfo,
@@ -13,6 +13,7 @@ import {
   Summary,
 } from './Steps';
 import { Intervals, PlanTypes } from '../constants';
+import { useIsMobile } from '../hooks';
 
 export type Step = 1 | 2 | 3 | 4 | 5;
 
@@ -23,6 +24,8 @@ export interface FormValuesState {
 }
 
 const MultiStepForm = () => {
+  const isMobile = useIsMobile();
+
   const [step, setStep] = useState<Step>(1);
   const [formValues, setFormValues] = useState<FormValuesState>({
     personalInfo: {
@@ -57,22 +60,6 @@ const MultiStepForm = () => {
       [formName]: data,
     });
   };
-
-  const [isMobile, setIsMobile] = useState<boolean>(false);
-
-  useEffect(() => {
-    const mediaQuery = window.matchMedia('(max-width: 768px)');
-    const handleMediaQueryChange = mediaQuery => {
-      setIsMobile(mediaQuery.matches);
-    };
-
-    handleMediaQueryChange(mediaQuery);
-    mediaQuery.addEventListener('change', handleMediaQueryChange);
-
-    return () => {
-      mediaQuery.removeEventListener('change', handleMediaQueryChange);
-    };
-  }, []);
 
   return (
     <FullscreenContainer>

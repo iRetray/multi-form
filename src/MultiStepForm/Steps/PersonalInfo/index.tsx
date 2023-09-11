@@ -2,7 +2,7 @@ import React from 'react';
 
 import { Typography } from '@mui/material';
 import { ButtonBlue, InputWithValidation } from '../../../components';
-import { StepContainer } from '../../styles';
+import { ButtonsContainer, StepContainer } from '../../styles';
 
 import { Step } from '../..';
 
@@ -80,7 +80,9 @@ export const PersonalInfo: React.FC<PersonalInfoProps> = ({
           label="Phone Number"
           placeholder="e.g. +1 234 567 890"
         />
-        <ButtonBlue type="submit">Next step</ButtonBlue>
+        <ButtonsContainer>
+          <ButtonBlue type="submit">Next step</ButtonBlue>
+        </ButtonsContainer>
       </form>
     </StepContainer>
   );

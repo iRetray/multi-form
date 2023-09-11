@@ -8,7 +8,7 @@ const FormApp = () => (
   <ThemeProvider theme={theme}>
     <GlobalStyles
       styles={{
-        body: { backgroundColor: COLORS.greySoft },
+        body: { backgroundColor: COLORS.greySoft, margin: '0px' },
       }}
     />
     <MultiStepForm />

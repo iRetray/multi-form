@@ -1,11 +1,14 @@
 import { styled } from '@mui/system';
 
 import { Card } from '@mui/material';
+import { COLORS } from '../constants';
 
 export const FullscreenContainer = styled('div')({
   height: '95vh',
   display: 'flex',
   '@media (max-width: 800px)': {
+    height: '100vh',
+    width: '100wh',
     position: 'relative',
   },
 });
@@ -25,6 +28,7 @@ export const CardFormContainer = styled(Card)({
     marginLeft: '16px',
     marginRight: '16px',
     padding: '24px',
+    height: 'fit-content',
   },
 });
 
@@ -39,5 +43,18 @@ export const StepContainer = styled('div')({
   width: '-webkit-fill-available',
   '@media (max-width: 800px)': {
     marginTop: '16px',
+  },
+});
+
+export const ButtonsContainer = styled('div')({
+  '@media (max-width: 800px)': {
+    width: '-webkit-fill-available',
+    position: 'absolute',
+    bottom: '0',
+    left: '0',
+    padding: '16px',
+    display: 'flex',
+    backgroundColor: COLORS.white,
+    boxShadow: '0px 25px 40px -20px rgba(0, 0, 0, 0.10)',
   },
 });
