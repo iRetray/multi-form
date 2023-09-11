@@ -8,11 +8,7 @@ describe('<PersonalInfo />', () => {
   beforeEach(() => {
     render(
       // @ts-ignore
-      <PersonalInfo
-        initialValues={{ name: '', email: '', phone: '' }}
-        onFormSubmited={() => {}}
-        updateCurrentStep={() => {}}
-      />,
+      <PersonalInfo updateCurrentStep={() => {}} />,
     );
   });
 

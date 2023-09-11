@@ -8,10 +8,9 @@ import { Step } from '../..';
 
 import { useForm } from 'react-hook-form';
 import { useIsMobile } from '../../../hooks';
+import { useFormContext } from '../../../context';
 
 interface PersonalInfoProps {
-  initialValues: PersonalInfoFormInterface;
-  onFormSubmited: (data: PersonalInfoFormInterface) => void;
   updateCurrentStep: (nextStep: Step) => void;
 }
 
@@ -22,19 +21,19 @@ export interface PersonalInfoFormInterface {
 }
 
 export const PersonalInfo: React.FC<PersonalInfoProps> = ({
-  initialValues,
-  onFormSubmited,
   updateCurrentStep,
 }) => {
+  const { values, updateFormValues } = useFormContext();
+
   const isMobile = useIsMobile();
 
   const { control, handleSubmit, getValues } =
     useForm<PersonalInfoFormInterface>({
-      defaultValues: initialValues,
+      defaultValues: values.PERSONAL_INFO,
     });
 
   const onSubmit = (): void => {
-    onFormSubmited(getValues());
+    updateFormValues('PERSONAL_INFO', getValues());
     updateCurrentStep(2);
   };
 

@@ -8,15 +8,7 @@ describe('<PickAddOns />', () => {
   beforeEach(() => {
     render(
       // @ts-ignore
-      <PickAddOns
-        initialValues={{
-          onlineService: false,
-          largerStorage: false,
-          customizableProfile: false,
-        }}
-        onFormSubmited={() => {}}
-        updateCurrentStep={() => {}}
-      />,
+      <PickAddOns updateCurrentStep={() => {}} />,
     );
   });
 

@@ -3,20 +3,12 @@ import '@testing-library/jest-dom';
 
 import { fireEvent, render, screen } from '@testing-library/react';
 import { SelectYourPlan } from '../../src/MultiStepForm/Steps';
-import { Intervals, PlanTypes } from '../../src/constants';
 
 describe('<SelectYourPlan />', () => {
   beforeEach(() => {
     render(
       // @ts-ignore
-      <SelectYourPlan
-        initialValues={{
-          planType: PlanTypes.ARCADE,
-          interval: Intervals.MONTHLY,
-        }}
-        onFormSubmited={() => {}}
-        updateCurrentStep={() => {}}
-      />,
+      <SelectYourPlan updateCurrentStep={() => {}} />,
     );
   });
 

@@ -3,31 +3,12 @@ import '@testing-library/jest-dom';
 
 import { fireEvent, render, screen } from '@testing-library/react';
 import { Finish, Summary } from '../../src/MultiStepForm/Steps';
-import { Intervals, PlanTypes } from '../../src/constants';
 
 describe('<Summary />', () => {
   beforeEach(() => {
     render(
       // @ts-ignore
-      <Summary
-        formValues={{
-          personalInfo: {
-            name: '',
-            email: '',
-            phone: '',
-          },
-          selectYourPlan: {
-            planType: PlanTypes.ARCADE,
-            interval: Intervals.MONTHLY,
-          },
-          pickAddOns: {
-            onlineService: true,
-            largerStorage: true,
-            customizableProfile: true,
-          },
-        }}
-        updateCurrentStep={() => {}}
-      />,
+      <Summary updateCurrentStep={() => {}} />,
     );
   });
 

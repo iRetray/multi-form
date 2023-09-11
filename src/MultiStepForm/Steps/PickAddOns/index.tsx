@@ -8,10 +8,9 @@ import { Step } from '../..';
 import { AddOn, ButtonBlue, ButtonWhite } from '../../../components';
 import { useForm } from 'react-hook-form';
 import { useIsMobile } from '../../../hooks';
+import { useFormContext } from '../../../context';
 
 interface PickAddOnsProps {
-  initialValues: PickAddOnsFormInterface;
-  onFormSubmited: (data: PickAddOnsFormInterface) => void;
   updateCurrentStep: (nextStep: Step) => void;
 }
 
@@ -22,15 +21,15 @@ export interface PickAddOnsFormInterface {
 }
 
 export const PickAddOns: React.FC<PickAddOnsProps> = ({
-  initialValues,
-  onFormSubmited,
   updateCurrentStep,
 }) => {
+  const { values, updateFormValues } = useFormContext();
+
   const isMobile = useIsMobile();
 
   const { setValue, handleSubmit, getValues, watch } =
     useForm<PickAddOnsFormInterface>({
-      defaultValues: initialValues,
+      defaultValues: values.PICK_ADD_ONS,
     });
 
   const currentOnlineStorage = watch('onlineService');
@@ -38,7 +37,7 @@ export const PickAddOns: React.FC<PickAddOnsProps> = ({
   const currentCustomizableProfile = watch('customizableProfile');
 
   const onSubmit = (): void => {
-    onFormSubmited(getValues());
+    updateFormValues('PICK_ADD_ONS', getValues());
     updateCurrentStep(4);
   };
 

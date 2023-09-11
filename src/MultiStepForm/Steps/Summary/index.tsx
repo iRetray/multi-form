@@ -3,11 +3,12 @@ import React from 'react';
 import { Typography } from '@mui/material';
 import { ButtonsContainer, StepContainer } from '../../styles';
 
-import { FormValuesState, Step } from '../..';
+import { Step } from '../..';
 import { BillContainer, TotalContainer } from './styles';
 import { COLORS, Intervals, PlanTypes } from '../../../constants';
 import { ButtonBlue, ButtonWhite, SummaryAddOn } from '../../../components';
 import { useIsMobile } from '../../../hooks';
+import { useFormContext } from '../../../context';
 
 const PLAN_TYPE_TO_STRING = {
   [PlanTypes.ARCADE]: 'Arcade',
@@ -33,19 +34,17 @@ const PLAN_INTERVAL_TO_STRING = {
 };
 
 interface SummaryProps {
-  formValues: FormValuesState;
   updateCurrentStep: (nextStep: Step) => void;
 }
 
-export const Summary: React.FC<SummaryProps> = ({
-  formValues,
-  updateCurrentStep,
-}) => {
+export const Summary: React.FC<SummaryProps> = ({ updateCurrentStep }) => {
+  const { values } = useFormContext();
+
   const isMobile = useIsMobile();
 
-  const { selectYourPlan, pickAddOns } = formValues;
+  const { SELECT_YOUR_PLAN, PICK_ADD_ONS } = values;
 
-  const isMonthly = selectYourPlan.interval === Intervals.MONTHLY;
+  const isMonthly = SELECT_YOUR_PLAN.interval === Intervals.MONTHLY;
 
   const extractNumbersFromString = (string: string): number => {
     const matchResult = string.match(/\d+/g);
@@ -54,19 +53,19 @@ export const Summary: React.FC<SummaryProps> = ({
 
   const getTotalPrice = (): string => {
     let total = extractNumbersFromString(
-      PLAN_TYPE_TO_PRICE(isMonthly)[selectYourPlan.planType],
+      PLAN_TYPE_TO_PRICE(isMonthly)[SELECT_YOUR_PLAN.planType],
     );
-    if (pickAddOns.onlineService) {
+    if (PICK_ADD_ONS.onlineService) {
       total =
         total +
         extractNumbersFromString(ADDON_TO_PRICE(isMonthly)['Online service']);
     }
-    if (pickAddOns.largerStorage) {
+    if (PICK_ADD_ONS.largerStorage) {
       total =
         total +
         extractNumbersFromString(ADDON_TO_PRICE(isMonthly)['Larger storage']);
     }
-    if (pickAddOns.customizableProfile) {
+    if (PICK_ADD_ONS.customizableProfile) {
       total =
         total +
         extractNumbersFromString(
@@ -96,8 +95,8 @@ export const Summary: React.FC<SummaryProps> = ({
               variant="body1"
               style={isMobile ? {} : { marginBottom: '8px' }}
             >
-              {PLAN_TYPE_TO_STRING[selectYourPlan.planType]} (
-              {PLAN_INTERVAL_TO_STRING[selectYourPlan.interval]})
+              {PLAN_TYPE_TO_STRING[SELECT_YOUR_PLAN.planType]} (
+              {PLAN_INTERVAL_TO_STRING[SELECT_YOUR_PLAN.interval]})
             </Typography>
             <Typography
               variant="body2"
@@ -114,12 +113,12 @@ export const Summary: React.FC<SummaryProps> = ({
             </Typography>
           </div>
           <Typography style={{ marginLeft: 'auto' }} variant="h5">
-            {PLAN_TYPE_TO_PRICE(isMonthly)[selectYourPlan.planType]}
+            {PLAN_TYPE_TO_PRICE(isMonthly)[SELECT_YOUR_PLAN.planType]}
           </Typography>
         </div>
-        {(pickAddOns.onlineService ||
-          pickAddOns.largerStorage ||
-          pickAddOns.customizableProfile) && (
+        {(PICK_ADD_ONS.onlineService ||
+          PICK_ADD_ONS.largerStorage ||
+          PICK_ADD_ONS.customizableProfile) && (
           <hr
             style={{
               color: COLORS.greyDark,
@@ -131,19 +130,19 @@ export const Summary: React.FC<SummaryProps> = ({
           />
         )}
 
-        {pickAddOns.onlineService && (
+        {PICK_ADD_ONS.onlineService && (
           <SummaryAddOn
             name="Online service"
             price={ADDON_TO_PRICE(isMonthly)['Online service']}
           />
         )}
-        {pickAddOns.largerStorage && (
+        {PICK_ADD_ONS.largerStorage && (
           <SummaryAddOn
             name="Larger storage"
             price={ADDON_TO_PRICE(isMonthly)['Larger storage']}
           />
         )}
-        {pickAddOns.customizableProfile && (
+        {PICK_ADD_ONS.customizableProfile && (
           <SummaryAddOn
             name="Customizable profile"
             price={ADDON_TO_PRICE(isMonthly)['Customizable profile']}

@@ -3,16 +3,19 @@ import { theme } from './config';
 
 import MultiStepForm from './MultiStepForm';
 import { COLORS } from './constants';
+import { FormContextProvider } from './context';
 
 const FormApp = () => (
-  <ThemeProvider theme={theme}>
-    <GlobalStyles
-      styles={{
-        body: { backgroundColor: COLORS.greySoft, margin: '0px' },
-      }}
-    />
-    <MultiStepForm />
-  </ThemeProvider>
+  <FormContextProvider>
+    <ThemeProvider theme={theme}>
+      <GlobalStyles
+        styles={{
+          body: { backgroundColor: COLORS.greySoft, margin: '0px' },
+        }}
+      />
+      <MultiStepForm />
+    </ThemeProvider>
+  </FormContextProvider>
 );
 
 export default FormApp;

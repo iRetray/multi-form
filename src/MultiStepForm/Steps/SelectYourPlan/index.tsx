@@ -11,10 +11,9 @@ import { SwitchContainer, SwitchStyled } from './styles';
 import { useForm } from 'react-hook-form';
 import { COLORS, Intervals, PlanTypes } from '../../../constants';
 import { useIsMobile } from '../../../hooks';
+import { useFormContext } from '../../../context';
 
 interface SelectYourPlanProps {
-  initialValues: SelectYourPlanFormInterface;
-  onFormSubmited: (data: SelectYourPlanFormInterface) => void;
   updateCurrentStep: (nextStep: Step) => void;
 }
 
@@ -24,22 +23,22 @@ export interface SelectYourPlanFormInterface {
 }
 
 export const SelectYourPlan: React.FC<SelectYourPlanProps> = ({
-  initialValues,
-  onFormSubmited,
   updateCurrentStep,
 }) => {
+  const { values, updateFormValues } = useFormContext();
+
   const isMobile = useIsMobile();
 
   const { setValue, handleSubmit, getValues, watch } =
     useForm<SelectYourPlanFormInterface>({
-      defaultValues: initialValues,
+      defaultValues: values.SELECT_YOUR_PLAN,
     });
 
   const currentType = watch('planType');
   const currentInterval = watch('interval');
 
   const onSubmit = (): void => {
-    onFormSubmited(getValues());
+    updateFormValues('SELECT_YOUR_PLAN', getValues());
     updateCurrentStep(3);
   };
 
