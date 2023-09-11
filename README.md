@@ -1,27 +1,36 @@
-# React + TypeScript + Vite
+# 🚀 Multi-step Form
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+### Technical Test for Corserva / SmartOS (Michael Page)
 
-Currently, two official plugins are available:
+## About the Project
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+This project uses the following technologies and main libraries:
 
-## Expanding the ESLint configuration
+-   `TypeScript` as the main programming language.
+-   `React` as the primary technology/library.
+-   `Material UI` as the design library.
+-   `Jest` and `React Testing Library` for unit testing.
 
-If you are developing a production application, we recommend updating the configuration to enable type aware lint rules:
+## 📦 Installation
 
-- Configure the top-level `parserOptions` property like this:
-
-```js
-   parserOptions: {
-    ecmaVersion: 'latest',
-    sourceType: 'module',
-    project: ['./tsconfig.json', './tsconfig.node.json'],
-    tsconfigRootDir: __dirname,
-   },
+To get started, follow these steps:
+```bash
+	git clone https://github.com/iRetray/multi-form.git
+	cd multi-form
+	npm install
 ```
 
-- Replace `plugin:@typescript-eslint/recommended` to `plugin:@typescript-eslint/recommended-type-checked` or `plugin:@typescript-eslint/strict-type-checked`
-- Optionally add `plugin:@typescript-eslint/stylistic-type-checked`
-- Install [eslint-plugin-react](https://github.com/jsx-eslint/eslint-plugin-react) and add `plugin:react/recommended` & `plugin:react/jsx-runtime` to the `extends` list
+## 🎬 Running the Application
+
+To launch the application, use this command:
+```bash
+	npm run dev
+```
+
+## 🧪 Running Unit Tests
+
+For conducting unit tests, execute the following command:
+```bash
+	npm run test
+```
+
