@@ -3,7 +3,9 @@
 ### Technical Test for Corserva / SmartOS (Michael Page)
 
 The app is deployed with Netlify in this URL
+
 https://multi-steps-form-app.netlify.app
+
 ⚡️ [Multi-step Form App Deployed](https://multi-steps-form-app.netlify.app)
 
 ## About the Project
