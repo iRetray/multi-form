@@ -15,22 +15,22 @@ This project uses the following technologies and main libraries:
 
 To get started, follow these steps:
 ```bash
-	git clone https://github.com/iRetray/multi-form.git
-	cd multi-form
-	npm install
+git clone https://github.com/iRetray/multi-form.git
+cd multi-form
+npm install
 ```
 
 ## 🎬 Running the Application
 
 To launch the application, use this command:
 ```bash
-	npm run dev
+npm run dev
 ```
 
 ## 🧪 Running Unit Tests
 
 For conducting unit tests, execute the following command:
 ```bash
-	npm run test
+npm run test
 ```
 
