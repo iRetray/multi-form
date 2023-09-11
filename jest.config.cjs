@@ -11,6 +11,7 @@ module.exports = {
   transformIgnorePatterns: [
     '/node_modules/(?!(^(@emotion/styled|@mui/material|@mui)/)).*/',
   ],
+  setupFilesAfterEnv: ['<rootDir>/__mocks__/window.js'],
   testEnvironment: 'jsdom',
   transform: {
     '^.+\\.(ts|tsx|js|jsx)$': 'ts-jest',
