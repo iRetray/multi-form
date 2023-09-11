@@ -7,7 +7,7 @@ export const FullscreenContainer = styled('div')({
   height: '95vh',
   display: 'flex',
   '@media (max-width: 800px)': {
-    height: '93vh',
+    height: '100vh',
     width: '100wh',
     position: 'relative',
   },
