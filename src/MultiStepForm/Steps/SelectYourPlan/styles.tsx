@@ -11,6 +11,9 @@ export const SwitchContainer = styled('div')({
   borderRadius: '8px',
   padding: '12px',
   marginTop: '32px',
+  '@media (max-width: 800px)': {
+    marginTop: '24px',
+  },
 });
 
 export const SwitchStyled = styled(Switch)(({ theme }) => ({

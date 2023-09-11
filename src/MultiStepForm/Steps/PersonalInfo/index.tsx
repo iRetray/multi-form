@@ -7,6 +7,7 @@ import { ButtonsContainer, StepContainer } from '../../styles';
 import { Step } from '../..';
 
 import { useForm } from 'react-hook-form';
+import { useIsMobile } from '../../../hooks';
 
 interface PersonalInfoProps {
   initialValues: PersonalInfoFormInterface;
@@ -25,6 +26,8 @@ export const PersonalInfo: React.FC<PersonalInfoProps> = ({
   onFormSubmited,
   updateCurrentStep,
 }) => {
+  const isMobile = useIsMobile();
+
   const { control, handleSubmit, getValues } =
     useForm<PersonalInfoFormInterface>({
       defaultValues: initialValues,
@@ -40,7 +43,10 @@ export const PersonalInfo: React.FC<PersonalInfoProps> = ({
       <Typography variant="h1" style={{ marginBottom: '12px' }}>
         Personal info
       </Typography>
-      <Typography variant="h2" style={{ marginBottom: '35px' }}>
+      <Typography
+        variant="h2"
+        style={{ marginBottom: isMobile ? '22px' : '35px' }}
+      >
         Please provide your name, email address, and phone number.
       </Typography>
       <form

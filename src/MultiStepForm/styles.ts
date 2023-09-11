@@ -29,6 +29,7 @@ export const CardFormContainer = styled(Card)({
     marginRight: '16px',
     padding: '24px',
     height: 'fit-content',
+    marginTop: '110px',
   },
 });
 
@@ -47,6 +48,10 @@ export const StepContainer = styled('div')({
 });
 
 export const ButtonsContainer = styled('div')({
+  marginTop: 'auto',
+  marginRight: '0px',
+  marginLeft: 'auto',
+  display: 'flex',
   '@media (max-width: 800px)': {
     width: '-webkit-fill-available',
     position: 'absolute',

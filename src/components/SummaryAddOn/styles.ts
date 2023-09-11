@@ -5,4 +5,7 @@ export const SummaryAddOnContainer = styled('div')({
   alignItems: 'center',
   justifyContent: 'space-between',
   marginTop: '16px',
+  '@media (max-width: 800px)': {
+    marginTop: '12px',
+  },
 });

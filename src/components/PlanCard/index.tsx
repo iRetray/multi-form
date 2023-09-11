@@ -1,6 +1,7 @@
 import { Typography } from '@mui/material';
 
-import { PlanCardContainer } from './styles';
+import { PlanCardContainer, TextContainer } from './styles';
+import { useIsMobile } from '../../hooks';
 
 interface PlanCardProps {
   selected: boolean;
@@ -18,16 +19,25 @@ export const PlanCard: React.FC<PlanCardProps> = ({
   price,
   zeroMargin,
   onClick,
-}) => (
-  <PlanCardContainer
-    selected={selected}
-    onClick={onClick}
-    zeroMargin={zeroMargin}
-  >
-    {icon}
-    <Typography style={{ marginTop: '40px' }} variant="body1">
-      {title}
-    </Typography>
-    <Typography variant="body2">{price}</Typography>
-  </PlanCardContainer>
-);
+}) => {
+  const isMobile = useIsMobile();
+
+  return (
+    <PlanCardContainer
+      selected={selected}
+      onClick={onClick}
+      zeroMargin={zeroMargin}
+    >
+      {icon}
+      <TextContainer>
+        <Typography
+          style={isMobile ? {} : { marginTop: '40px' }}
+          variant="body1"
+        >
+          {title}
+        </Typography>
+        <Typography variant="body2">{price}</Typography>
+      </TextContainer>
+    </PlanCardContainer>
+  );
+};

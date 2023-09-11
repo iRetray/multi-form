@@ -1,12 +1,13 @@
 import React from 'react';
 
 import { Typography } from '@mui/material';
-import { StepContainer } from '../../styles';
+import { ButtonsContainer, StepContainer } from '../../styles';
 
 import { FormValuesState, Step } from '../..';
-import { BillContainer } from './styles';
+import { BillContainer, TotalContainer } from './styles';
 import { COLORS, Intervals, PlanTypes } from '../../../constants';
 import { ButtonBlue, ButtonWhite, SummaryAddOn } from '../../../components';
+import { useIsMobile } from '../../../hooks';
 
 const PLAN_TYPE_TO_STRING = {
   [PlanTypes.ARCADE]: 'Arcade',
@@ -40,6 +41,8 @@ export const Summary: React.FC<SummaryProps> = ({
   formValues,
   updateCurrentStep,
 }) => {
+  const isMobile = useIsMobile();
+
   const { selectYourPlan, pickAddOns } = formValues;
 
   const isMonthly = selectYourPlan.interval === Intervals.MONTHLY;
@@ -89,7 +92,10 @@ export const Summary: React.FC<SummaryProps> = ({
           }}
         >
           <div>
-            <Typography variant="body1" style={{ marginBottom: '8px' }}>
+            <Typography
+              variant="body1"
+              style={isMobile ? {} : { marginBottom: '8px' }}
+            >
               {PLAN_TYPE_TO_STRING[selectYourPlan.planType]} (
               {PLAN_INTERVAL_TO_STRING[selectYourPlan.interval]})
             </Typography>
@@ -99,7 +105,7 @@ export const Summary: React.FC<SummaryProps> = ({
                 updateCurrentStep(2);
               }}
               style={{
-                marginBottom: '8px',
+                marginBottom: isMobile ? '0px' : '8px',
                 textDecoration: 'underline',
                 cursor: 'pointer',
               }}
@@ -119,8 +125,8 @@ export const Summary: React.FC<SummaryProps> = ({
               color: COLORS.greyDark,
               borderStyle: 'solid',
               opacity: 0.2,
-              marginTop: '24px',
-              marginBottom: '24px',
+              marginTop: isMobile ? '12px' : '24px',
+              marginBottom: isMobile ? '12px' : '24px',
             }}
           />
         )}
@@ -144,20 +150,13 @@ export const Summary: React.FC<SummaryProps> = ({
           />
         )}
       </BillContainer>
-      <div
-        style={{
-          display: 'flex',
-          alignItems: 'center',
-          justifyContent: 'space-between',
-          margin: '24px',
-        }}
-      >
+      <TotalContainer>
         <Typography variant="body2">
           {isMonthly ? 'Total (per month)' : 'Total (per year)'}
         </Typography>
         <Typography variant="h6">{getTotalPrice()}</Typography>
-      </div>
-      <div style={{ display: 'flex', marginTop: 'auto' }}>
+      </TotalContainer>
+      <ButtonsContainer style={{ marginLeft: '0px' }}>
         <ButtonWhite
           onClick={() => {
             updateCurrentStep(3);
@@ -166,13 +165,19 @@ export const Summary: React.FC<SummaryProps> = ({
           Go Back
         </ButtonWhite>
         <ButtonBlue
+          sx={{
+            bgcolor: COLORS.secondary,
+            ':hover': {
+              bgcolor: '#928CFF',
+            },
+          }}
           onClick={() => {
             updateCurrentStep(5);
           }}
         >
           Confirm
         </ButtonBlue>
-      </div>
+      </ButtonsContainer>
     </StepContainer>
   );
 };

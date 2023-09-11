@@ -1,12 +1,13 @@
 import React from 'react';
 
 import { Typography } from '@mui/material';
-import { StepContainer } from '../../styles';
+import { ButtonsContainer, StepContainer } from '../../styles';
 
 import { Step } from '../..';
 
 import { AddOn, ButtonBlue, ButtonWhite } from '../../../components';
 import { useForm } from 'react-hook-form';
+import { useIsMobile } from '../../../hooks';
 
 interface PickAddOnsProps {
   initialValues: PickAddOnsFormInterface;
@@ -25,6 +26,8 @@ export const PickAddOns: React.FC<PickAddOnsProps> = ({
   onFormSubmited,
   updateCurrentStep,
 }) => {
+  const isMobile = useIsMobile();
+
   const { setValue, handleSubmit, getValues, watch } =
     useForm<PickAddOnsFormInterface>({
       defaultValues: initialValues,
@@ -51,7 +54,10 @@ export const PickAddOns: React.FC<PickAddOnsProps> = ({
       <Typography variant="h1" style={{ marginBottom: '12px' }}>
         Pick add-ons
       </Typography>
-      <Typography variant="h2" style={{ marginBottom: '35px' }}>
+      <Typography
+        variant="h2"
+        style={{ marginBottom: isMobile ? '22px' : '35px' }}
+      >
         Add-ons help enhance your gaming experience.
       </Typography>
       <form
@@ -89,7 +95,7 @@ export const PickAddOns: React.FC<PickAddOnsProps> = ({
           subtitle="Custom theme on your profile"
           price="+$2/mo"
         />
-        <div style={{ display: 'flex', marginTop: 'auto' }}>
+        <ButtonsContainer style={{ marginLeft: '0px' }}>
           <ButtonWhite
             onClick={() => {
               updateCurrentStep(2);
@@ -98,7 +104,7 @@ export const PickAddOns: React.FC<PickAddOnsProps> = ({
             Go Back
           </ButtonWhite>
           <ButtonBlue type="submit">Next step</ButtonBlue>
-        </div>
+        </ButtonsContainer>
       </form>
     </StepContainer>
   );

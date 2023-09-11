@@ -6,3 +6,13 @@ export const BillContainer = styled('div')({
   padding: '16px 24px 24px 24px',
   borderRadius: '8px',
 });
+
+export const TotalContainer = styled('div')({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'space-between',
+  margin: '24px',
+  '@media (max-width: 800px)': {
+    margin: '24px 24px 0px 24px',
+  },
+});

@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { Typography } from '@mui/material';
-import { StepContainer } from '../../styles';
+import { ButtonsContainer, StepContainer } from '../../styles';
 
 import { Step } from '../..';
 import { ButtonBlue, ButtonWhite, PlanCard } from '../../../components';
@@ -9,7 +9,8 @@ import { ButtonBlue, ButtonWhite, PlanCard } from '../../../components';
 import { ArcadeIcon, AdvancedIcon, ProIcon } from './PLAN_ICONS';
 import { SwitchContainer, SwitchStyled } from './styles';
 import { useForm } from 'react-hook-form';
-import { Intervals, PlanTypes } from '../../../constants';
+import { COLORS, Intervals, PlanTypes } from '../../../constants';
+import { useIsMobile } from '../../../hooks';
 
 interface SelectYourPlanProps {
   initialValues: SelectYourPlanFormInterface;
@@ -27,6 +28,8 @@ export const SelectYourPlan: React.FC<SelectYourPlanProps> = ({
   onFormSubmited,
   updateCurrentStep,
 }) => {
+  const isMobile = useIsMobile();
+
   const { setValue, handleSubmit, getValues, watch } =
     useForm<SelectYourPlanFormInterface>({
       defaultValues: initialValues,
@@ -55,7 +58,10 @@ export const SelectYourPlan: React.FC<SelectYourPlanProps> = ({
       <Typography variant="h1" style={{ marginBottom: '12px' }}>
         Select your plan
       </Typography>
-      <Typography variant="h2" style={{ marginBottom: '35px' }}>
+      <Typography
+        variant="h2"
+        style={{ marginBottom: isMobile ? '22px' : '35px' }}
+      >
         You have the option of monthly or yearly billing.
       </Typography>
       <form
@@ -66,7 +72,12 @@ export const SelectYourPlan: React.FC<SelectYourPlanProps> = ({
         }}
         onSubmit={handleSubmit(onSubmit)}
       >
-        <div style={{ display: 'flex', flexDirection: 'row' }}>
+        <div
+          style={{
+            display: 'flex',
+            flexDirection: isMobile ? 'column' : 'row',
+          }}
+        >
           <PlanCard
             selected={currentType === 'ARCADE'}
             icon={ArcadeIcon}
@@ -97,14 +108,38 @@ export const SelectYourPlan: React.FC<SelectYourPlanProps> = ({
           />
         </div>
         <SwitchContainer>
-          <Typography variant="h4">Monthly</Typography>
+          <Typography
+            variant="h4"
+            style={
+              currentInterval === Intervals.MONTHLY
+                ? {}
+                : {
+                    fontWeight: '500',
+                    color: COLORS.greyDark,
+                  }
+            }
+          >
+            Monthly
+          </Typography>
           <SwitchStyled
             checked={currentInterval === Intervals.YEARLY}
             onChange={handleChangeSwitch}
           />
-          <Typography variant="h4">Yearly</Typography>
+          <Typography
+            variant="h4"
+            style={
+              currentInterval === Intervals.YEARLY
+                ? {}
+                : {
+                    fontWeight: '500',
+                    color: COLORS.greyDark,
+                  }
+            }
+          >
+            Yearly
+          </Typography>
         </SwitchContainer>
-        <div style={{ display: 'flex', marginTop: 'auto' }}>
+        <ButtonsContainer style={{ marginLeft: '0px' }}>
           <ButtonWhite
             onClick={() => {
               updateCurrentStep(1);
@@ -113,7 +148,7 @@ export const SelectYourPlan: React.FC<SelectYourPlanProps> = ({
             Go Back
           </ButtonWhite>
           <ButtonBlue type="submit">Next step</ButtonBlue>
-        </div>
+        </ButtonsContainer>
       </form>
     </StepContainer>
   );
