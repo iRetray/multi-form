@@ -8,6 +8,7 @@ import { COLORS } from '../../constants';
 interface InputWithValidationProps {
   label: string;
   placeholder: string;
+  type?: string;
   name: 'name' | 'email' | 'phone';
   control: Control<PersonalInfoFormInterface>;
   rules:
@@ -21,6 +22,7 @@ interface InputWithValidationProps {
 export const InputWithValidation: React.FC<InputWithValidationProps> = ({
   label,
   placeholder,
+  type,
   name,
   control,
   rules,
@@ -43,6 +45,7 @@ export const InputWithValidation: React.FC<InputWithValidationProps> = ({
           </LabelsContainer>
           <TextField
             {...field}
+            type={type}
             error={!!fieldState.error}
             placeholder={placeholder}
             style={{ height: '48px', marginBottom: '24px' }}

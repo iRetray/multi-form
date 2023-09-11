@@ -79,6 +79,7 @@ export const PersonalInfo: React.FC<PersonalInfoProps> = ({
         />
         <InputWithValidation
           name="phone"
+          type="number"
           control={control}
           rules={{
             required: 'This field is required',
